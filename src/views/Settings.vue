@@ -43,7 +43,11 @@
           </a>
         </Block>
         <div v-if="isReady">
-          <Block :title="$t('settings.profile')">
+          <Block
+            :title="$t('settings.profile')"
+            icon="info"
+            link="https://docs.snapshot.org/spaces/create#profile"
+          >
             <div class="mb-2">
               <a
                 href="https://docs.snapshot.org/spaces/add-avatar"
@@ -92,7 +96,6 @@
                   target="_blank"
                   href="https://docs.snapshot.org/spaces/add-custom-domain"
                 >
-                  <Icon name="info" size="24" class="text-gray p-1" />
                 </a>
               </UiButton>
               <div class="d-flex flex-items-center px-2">

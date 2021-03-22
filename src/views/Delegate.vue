@@ -12,7 +12,7 @@
         <PageLoading v-else />
       </div>
       <template v-if="loaded">
-        <Block :itle="$t('delegate.selectAddress')">
+        <Block :title="$t('delegate.selectAddress')">
           <UiButton class="width-full mb-2">
             <input
               v-model.trim="form.address"

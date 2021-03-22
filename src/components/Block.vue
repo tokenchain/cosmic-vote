@@ -9,13 +9,27 @@
     >
       {{ title }}
       <UiCounter v-if="counter" :counter="counter" class="ml-1" />
+
       <a
-        v-if="icon"
+        v-if="icon === 'info'"
+        :href="link"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-gray"
+      >
+        <Icon
+          :name="icon"
+          size="22"
+          style="font-weight: 200; color: var(--link-color);"
+        />
+      </a>
+      <a
+        v-else-if="icon"
         @click="$emit('submit')"
         class="float-right text-gray"
         style="padding-top: 2px;"
       >
-        <Icon :name="icon" size="22" />
+        <Icon :name="icon" size="24" />
       </a>
     </h4>
     <div :class="!slim && 'p-4'">
@@ -26,7 +40,7 @@
 
 <script>
 export default {
-  props: ['title', 'counter', 'slim', 'icon'],
+  props: ['title', 'counter', 'slim', 'icon', 'link'],
   emits: ['submit']
 };
 </script>
