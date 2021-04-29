@@ -5,12 +5,14 @@
         <Block :slim="true" :title="$t('filters')" class="overflow-hidden">
           <div class="py-3">
             <router-link
+              @click="proposals = []"
               :to="{ name: 'timeline' }"
               v-text="$t('favorites')"
               :class="!scope && 'router-link-exact-active'"
               class="d-block px-4 py-2 sidenav-item"
             />
             <router-link
+              @click="proposals = []"
               :to="{ name: 'timeline', params: { scope: 'all' } }"
               v-text="$t('allSpaces')"
               class="d-block px-4 py-2 sidenav-item"
@@ -74,7 +76,7 @@
 </template>
 
 <script>
-import { onMounted, ref, computed } from 'vue';
+import { onMounted, ref, computed, watch } from 'vue';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import { scrollEndMonitor } from '@/helpers/utils';
@@ -85,6 +87,7 @@ import { useUnseenProposals } from '@/composables/useUnseenProposals';
 
 // Persistent filter state
 const filterBy = ref('all');
+const proposals = ref([]);
 
 export default {
   setup() {
@@ -98,7 +101,17 @@ export default {
     );
 
     const loading = ref(false);
-    const proposals = ref([]);
+
+    // Initialize
+    onMounted(() => {
+      if (!proposals.value[0]) load();
+    });
+
+    async function load() {
+      loading.value = true;
+      await loadProposals();
+      loading.value = false;
+    }
 
     // Infinite scroll with pagination
     const {
@@ -150,15 +163,6 @@ export default {
       } catch (e) {
         console.log(e);
       }
-    }
-
-    // Initialize
-    onMounted(load());
-
-    async function load() {
-      loading.value = true;
-      await loadProposals();
-      loading.value = false;
     }
 
     // Change filter
