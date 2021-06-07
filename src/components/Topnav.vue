@@ -16,7 +16,7 @@
               class="d-inline-block d-flex flex-items-center"
               style="font-size: 24px; padding-top: 4px"
             >
-              snapshot
+              Cosmicswap
             </router-link>
           </div>
           <div :key="web3.account">
@@ -76,10 +76,6 @@
         :open="modalLangOpen"
         @close="modalLangOpen = false"
       />
-      <ModalWalletNotice
-        :open="modalWalletNotice"
-        @close="modalWalletNotice = false"
-      />
     </teleport>
   </Sticky>
 </template>
@@ -100,8 +96,7 @@ export default {
     return {
       loading: false,
       modalAboutOpen: false,
-      modalLangOpen: false,
-      modalWalletNotice: false
+      modalLangOpen: false
     };
   },
   computed: {
@@ -116,15 +111,12 @@ export default {
   watch: {
     space() {
       this.setTitle();
-    },
-    'web3.walletConnectType': async function (val) {
-      if (val === 'Gnosis Safe Multisig') this.modalWalletNotice = true;
     }
   },
   methods: {
     ...mapActions(['login']),
     setTitle() {
-      document.title = this.space.name ? this.space.name : 'Snapshot';
+      document.title = this.space.name ? this.space.name : 'Cosmicswap';
     },
     async handleLogin(connector) {
       this.modalAccountOpen = false;

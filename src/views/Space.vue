@@ -67,7 +67,7 @@ export default {
     const route = useRoute();
     const { domain } = useDomain();
 
-    const spaceId = domain || route.params.key;
+    const spaceId = 'cosmicswap.eth';
 
     const loading = ref(false);
     const proposals = ref([]);

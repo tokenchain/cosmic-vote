@@ -21,9 +21,10 @@ export default {
           ? 'space'
           : `logo${this.symbolIndex}`
         : 'logo';
-      const url = this.space.avatar
-        ? this.space.avatar
-        : `https://raw.githubusercontent.com/snapshot-labs/snapshot-spaces/master/spaces/${this.spaceId}/${file}.png`;
+      // const url = this.space.avatar
+      //   ? this.space.avatar
+      //   : `https://raw.githubusercontent.com/snapshot-labs/snapshot-spaces/master/spaces/${this.spaceId}/${file}.png`;
+      const url = 'https://cloudflare-ipfs.com/ipfs/QmWs9mTB5tmkc98qGmmX8ZX92fsmMWVbuAZ9mqgciCnZTN';
       return `https://worker.snapshot.org/mirror?img=${encodeURIComponent(
         url
       )}`;

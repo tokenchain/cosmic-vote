@@ -2,7 +2,9 @@
   <div style="position: fixed; width: 240px">
     <Block :slim="true" class="overflow-hidden">
       <div class="text-center border-bottom header-bg">
-        <Token :space="space" symbolIndex="space" size="80" class="mt-3 mb-2" />
+        <!-- <Icon size="80" name="gitbook" class="mt-3 mb-2" /> -->
+        <img class="mr-3" :src="require('../../../public/favicon.png')" height="100"/>
+        <!-- <Token :space="space" symbolIndex="space" size="80" class="mt-3 mb-2" /> -->
         <h3 class="mb-3 px-4">{{ space.name }}</h3>
       </div>
       <div class="py-3">
@@ -31,12 +33,12 @@
           :class="$route.name === 'about' && 'router-link-exact-active'"
           class="d-block px-4 py-2 sidenav-item"
         />
-        <router-link
+        <!-- <router-link
           v-if="isAdmin"
           :to="{ name: 'settings' }"
           v-text="$t('settings.header')"
           class="d-block px-4 py-2 sidenav-item"
-        />
+        /> -->
       </div>
     </Block>
   </div>

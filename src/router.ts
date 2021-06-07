@@ -28,7 +28,8 @@ const routes: any[] = [
   {
     path: '/',
     name: 'home',
-    component: domains[domainName] ? Space : Home
+    component: Space,
+    beforeEnter
   },
   { path: '/setup', name: 'setup', component: Setup },
   { path: '/:key/settings/:from?', name: 'settings', component: Settings },
