@@ -116,7 +116,7 @@ export default {
   methods: {
     ...mapActions(['login']),
     setTitle() {
-      document.title = this.space.name ? this.space.name : 'Cosmicswap';
+      document.title = this.space.name ? this.space.name : 'CosmicSwap';
     },
     async handleLogin(connector) {
       this.modalAccountOpen = false;
