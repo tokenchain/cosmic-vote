@@ -4,6 +4,7 @@ import {EventBus} from "vue-backgrounds"
 import {getStoredItemStr} from "@/api/compress/urltool"
 import BN from "bn.js"
 import {shorten} from "vue-blocklink";
+import numeral from 'numeral';
 
 export default {
     mixins: [LANUAGESMIX, colorx],
@@ -103,14 +104,15 @@ export default {
         toBn(anything) {
             return new BN(anything)
         },
-        _ipfsUrl(hash) {
-            return ""
+        _ipfsUrl(ipfsHash) {
+            return `https://${process.env.ipfs_node}/ipfs/${ipfsHash}`;
         },
-        _etherscanLink(hash) {
-            return ""
+        _etherscanLink(str, type) {
+            const network = ""
+            return `https://${network}etherscan.io/${type}/${str}`;
         },
-        _numeral(hash) {
-            return ""
+        _numeral(number, format = '(0.[00]a)') {
+            return numeral(number).format(format);
         },
         _shorten(a) {
             return shorten(a)

@@ -22,5 +22,10 @@ export default {
 
         }
     },
+    methods: {
+        getNameSpaces() {
+            return namespaces
+        }
+    }
 
 }

@@ -1,6 +1,6 @@
 {
   "name": "vote-dao",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "repository": "balancer-labs/snapshot",
   "license": "MIT",
   "scripts": {
@@ -11,6 +11,20 @@
     "lint": "eslint --ext .ts,.vue --fix .",
     "lintTs": "eslint --ext .ts --fix .",
     "lintjs": "eslint --ext .js --fix --ignore-path .gitignore ."
+  },
+  "extensions": {
+    "title": "DAO Conference",
+    "desc": "The DAO Conference platform",
+    "compile": "src/pages/dao.vue",
+    "app_icon": "/iconpng.ico",
+    "node_using": "okchain",
+    "chainID": "65",
+    "documentation": "https://docs.balincer.network",
+    "twit": "No message in here",
+    "explorertx": "https://www.oklink.com/oec-test/tx/",
+    "referraluri": "https://tgairdrop.balincer.network?code=",
+    "telegram_chat": "https://t.me/BLCR_official",
+    "telegram_channel": "https://t.me/BalincerChannel"
   },
   "dependencies": {
     "@bonustrack/lock": "github:bonustrack/lock#e66d69d728e4003c4fcf5b124387bb16c37cbfe1",

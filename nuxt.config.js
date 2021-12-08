@@ -3,59 +3,21 @@ const webpack = require("webpack")
 //const path = require("path")
 const js = require("./package.json")
 const version = js.version
-const staging_domain = js.extensions.stage_domain
 const domain_target = js.extensions.production_domain
-
 const nodeExternals = require("webpack-node-externals")
 const {LANUAGES} = require("./src/i18n")
 //"src/pages/index_ethcap.vue"
 //const SpritePlugin = require("svg-sprite-loader/plugin");
 
-function hasAddressInSetting() {
-    return process.env.SERVER_IP_DOMAIN !== ""
-}
-
-function wsGet() {
-    if (hasAddressInSetting()) {
-        return "ws://" + process.env.SERVER_IP_DOMAIN + "/ws"
-    } else {
-        return "ws://" + staging_domain + "/ws"
-    }
-}
-
-function httpGet() {
-    if (hasAddressInSetting()) {
-        return "ws://" + process.env.SERVER_IP_DOMAIN + "/ws"
-    } else {
-        return "ws://" + staging_domain + "/ws"
-    }
-}
-
 module.exports = {
     env: {
         baseUrl: process.env.BASE_URL || "http://localhost:3000",
-        domain: domain_target,
+        domain: js.extensions.stage_domain,
         version: version,
-        wsUrl: wsGet(),
         network: js.extensions.node_using,
-        BalincerToken: js.extensions.BalincerToken[js.extensions.node_using],
-        BalincerPriceOracle: js.extensions.BalincerPriceOracle[js.extensions.node_using],
-        MarginPoolAddressesProvider: js.extensions.MarginPoolAddressesProvider[js.extensions.node_using],
-        XToken: js.extensions.XToken[js.extensions.node_using],
-        VariableDebtToken: js.extensions.VariableDebtToken[js.extensions.node_using],
-        WOKT: js.extensions.WOKT[js.extensions.node_using],
-        WETH9: js.extensions.WETH9[js.extensions.node_using],
-        UniswapV2Router02: js.extensions.UniswapV2Router02[js.extensions.node_using],
-        CherrySwapRouter: js.extensions.CherrySwapRouter[js.extensions.node_using],
-        MarginPool: js.extensions.MarginPool[js.extensions.node_using],
-        WETHGateway: js.extensions.WETHGateway[js.extensions.node_using],
-        DefaultReserveInterestRateStrategy: js.extensions.DefaultReserveInterestRateStrategy[js.extensions.node_using],
-        testing_pin_input: js.extensions.testing.pin_input,
-        testing_wallet: js.extensions.testing.wall_input,
-        testing_scanning: js.extensions.testing.scanning,
         chainid: js.extensions.chainID,
         exploreruri: js.extensions.explorertx,
-        referraluri: js.extensions.referraluri,
+        ipfs_node: js.extensions.ipfs_node,
         doc: js.extensions.documentation,
         telegram_chat: js.extensions.telegram_chat,
         telegram_channel: js.extensions.telegram_channel,
@@ -89,9 +51,6 @@ module.exports = {
     },
     plugins: [{
         src: "~/plugins/backgrounds",
-        ssr: false
-    }, {
-        src: "~/plugins/ui",
         ssr: false
     }, {
         src: "~/plugins/clipboard",
