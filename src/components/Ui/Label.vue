@@ -1,9 +1,13 @@
 <template>
   <span class="Label border v-align-middle">
-    <slot />
+    <slot/>
   </span>
 </template>
-
+<script>
+export default {
+  name: "label"
+}
+</script>
 <style scoped lang="scss">
 @import '../../vars';
 

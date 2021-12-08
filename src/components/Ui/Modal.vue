@@ -1,23 +1,34 @@
 <template>
   <div v-if="open" class="modal mx-auto">
-    <div class="backdrop" @click="$emit('close')" />
+    <div class="backdrop" @click="$emit('close')"/>
     <div
-      class="shell overflow-hidden anim-scale-in position-relative rounded-0 rounded-md-2"
+        class="shell overflow-hidden anim-scale-in position-relative rounded-0 rounded-md-2"
     >
-      <slot />
+      <slot/>
       <a
-        @click="$emit('close')"
-        class="position-absolute right-0 top-1 p-4 text-gray"
+          @click="$emit('close')"
+          class="position-absolute right-0 top-1 p-4 text-gray"
       >
-        <Icon name="close" />
+        <icon name="close"/>
       </a>
     </div>
   </div>
 </template>
 
 <script>
+import Icon from "../Icon";
 export default {
-  props: ['open']
+  name: "uiModal",
+  components: {Icon},
+  props: {
+
+    open: {
+      type: Boolean,
+      default: true,
+      required: false
+    }
+
+  }
 };
 </script>
 

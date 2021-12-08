@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组</title>
+    <defs>
+        <filter color-interpolation-filters="auto" id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 1.000000 0 0 0 0 0.756863 0 0 0 0 0.219608 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+        <polygon id="path-2" points="0 0 16 0 16 16 0 16"></polygon>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="桌面端-HD" transform="translate(-507.000000, -34.000000)">
+            <g id="编组" transform="translate(507.000000, 31.000000)" filter="url(#filter-1)">
+                <g transform="translate(0.000000, 3.000000)">
+                    <mask id="mask-3" fill="white">
+                        <use xlink:href="#path-2"></use>
+                    </mask>
+                    <g id="Clip-2"></g>
+                    <path d="M14.8220859,4.97729138 L8.93251534,0.328317373 C8.38196852,-0.109439124 7.61803148,-0.109439124 7.06748466,0.328317373 L1.17791411,4.97729138 C0.435316084,5.56388509 0,6.47004104 0,7.42872777 L0,14.4284542 C0,15.295212 0.687116564,16 1.5321419,16 L5.08295545,16 L5.08295545,10.2829001 C5.08295545,9.00902873 6.09015738,7.97154583 7.33635636,7.97154583 L8.66364364,7.97154583 C9.90557482,7.97154583 10.9170445,9.00902873 10.9170445,10.2829001 L10.9170445,16 L14.4678581,16 C15.3128834,16 16,15.295212 16,14.4284542 L16,7.42872777 C16,6.47004104 15.5646839,5.56388509 14.8220859,4.97729138" id="Fill-1" fill="#FFC138" mask="url(#mask-3)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

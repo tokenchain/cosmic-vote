@@ -1,78 +1,90 @@
 <template>
-  <Sticky class="mb-4">
+  <sticky class="mb-4">
     <nav id="topnav" class="border-bottom width-full bg-black">
-      <Container>
+      <dao-container>
         <div class="d-flex flex-items-center" style="height: 78px;">
           <div class="flex-auto d-flex flex-items-center">
             <router-link
-              :to="{ name: 'home' }"
-              class="d-inline-block d-flex flex-items-center"
-              style="font-size: 24px; padding-top: 4px;"
+                :to="{ name: 'home' }"
+                class="d-inline-block d-flex flex-items-center"
+                style="font-size: 24px; padding-top: 4px;"
             >
               <span
-                :class="namespace && 'hide-sm'"
-                class="mr-1"
-                v-text="'snapshot'"
+                  :class="namespaceraw && 'hide-sm'"
+                  class="mr-1"
+                  v-text="'snapshot'"
               />
-              <template v-if="namespace">
-                <span class="pl-1 pr-2 text-gray" v-text="'/'" />
-                <Token :address="namespace.image" size="28" />
-                <span class="ml-2" v-text="namespace.symbol" />
+              <template v-if="namespaceraw">
+                <span class="pl-1 pr-2 text-gray" v-text="'/'"/>
+                <dao-token :address="namespaceraw.image" size="28"/>
+                <span class="ml-2" v-text="namespaceraw.symbol"/>
               </template>
             </router-link>
           </div>
           <div :key="web3.account">
             <template v-if="web3.account && !wrongNetwork">
-              <UiButton
-                @click="modalOpen = true"
-                class="button-outline"
-                :loading="loading"
-              >
-                <Avatar :address="web3.account" size="16" class="mr-2 ml-n1" />
-                <span v-if="web3.name" v-text="web3.name" />
-                <span v-else v-text="_shorten(web3.account)" />
-              </UiButton>
+              <ui-button
+                  @click="modalOpen = true"
+                  class="button-outline"
+                  :loading="loading">
+                <avatar :address="web3.account" size="16" class="mr-2 ml-n1"/>
+                <span v-if="web3.name" v-text="web3.name"/>
+                <span v-else v-text="_shorten(web3.account)"/>
+              </ui-button>
             </template>
-            <UiButton
-              v-if="web3.injectedLoaded && wrongNetwork"
-              class="text-red"
-            >
-              <Icon name="warning" class="ml-n1 mr-1 v-align-middle" />
+            <ui-button
+                v-if="web3.injectedLoaded && wrongNetwork"
+                class="text-red">
+              <icon name="warning" class="ml-n1 mr-1 v-align-middle"/>
               Wrong network
-            </UiButton>
-            <UiButton
-              v-if="showLogin"
-              @click="modalOpen = true"
-              :loading="loading"
-            >
+            </ui-button>
+            <ui-button
+                v-if="showLogin"
+                @click="modalOpen = true"
+                :loading="loading">
               Connect wallet
-            </UiButton>
-            <UiButton @click="modalAboutOpen = true" class="ml-2">
-              <span v-text="'?'" class="ml-n1 mr-n1" />
-            </UiButton>
+            </ui-button>
+            <ui-button @click="modalAboutOpen = true" class="ml-2">
+              <span v-text="'?'" class="ml-n1 mr-n1"/>
+            </ui-button>
           </div>
         </div>
-        <ModalAccount
-          :open="modalOpen"
-          @close="modalOpen = false"
-          @login="handleLogin"
+        <account-modal
+            :open="modalOpen"
+            @close="modalOpen = false"
+            @login="handleLogin"
         />
-        <ModalAbout :open="modalAboutOpen" @close="modalAboutOpen = false" />
-      </Container>
+        <about-modal :open="modalAboutOpen" @close="modalAboutOpen = false"/>
+      </dao-container>
     </nav>
-  </Sticky>
+  </sticky>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import {mapActions} from 'vuex';
 import namespaces from '@/namespaces.json';
+import UiButton from "./Ui/Button";
+import Sticky from "./Sticky";
+import AccountModal from "./Modal/Account";
+import AboutModal from "./Modal/About";
+import Icon from "./Icon";
+import Avatar from "./Avatar";
+import Token from "./Token";
+import {shorten} from "vue-blocklink"
+import DaoContainer from "./Container";
+import lo_dao from "../api/mixins/dao/lo_dao";
+import string_tx from "../api/mixins/string_tx";
+import DaoToken from "./Token";
 
 export default {
+  components: {DaoToken, DaoContainer, Token, Avatar, Icon, AboutModal, AccountModal, Sticky, UiButton},
+  mixins: [lo_dao, string_tx],
   data() {
     return {
       loading: false,
       modalOpen: false,
-      modalAboutOpen: false
+      modalAboutOpen: false,
+      key: this.$route.params.key
     };
   },
   computed: {
@@ -81,20 +93,14 @@ export default {
     },
     showLogin() {
       return (
-        (!this.web3.account && !this.web3.injectedLoaded) ||
-        (!this.web3.account && !this.wrongNetwork)
+          (!this.web3.account && !this.web3.injectedLoaded) ||
+          (!this.web3.account && !this.wrongNetwork)
       );
-    },
-    namespace() {
-      try {
-        return namespaces[this.$route.params.key];
-      } catch (e) {
-        return {};
-      }
     }
   },
   methods: {
     ...mapActions(['login']),
+
     async handleLogin(connector) {
       this.modalOpen = false;
       this.loading = true;

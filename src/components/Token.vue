@@ -1,10 +1,8 @@
 <template>
   <img
-    :src="
-      `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${address}/logo.png`
-    "
-    class="d-inline-block bg-gray-9 v-align-middle line-height-0 circle border"
-    :style="{
+      :src="icon_image"
+      class="d-inline-block bg-gray-9 v-align-middle line-height-0 circle border"
+      :style="{
       width: `${size || 22}px`,
       height: `${size || 22}px`
     }"
@@ -13,6 +11,24 @@
 
 <script>
 export default {
-  props: ['address', 'size']
+  name: "daoToken",
+  props: {
+    address: {
+      type: String,
+      default: "",
+      required: false
+    },
+    size: {
+      type: Number | String,
+      default: 0,
+      required: false
+    }
+  },
+  computed: {
+    icon_image() {
+      return `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${this.address}/logo.png`
+    }
+  }
+
 };
 </script>

@@ -1,0 +1,4 @@
+#!/bin/bash
+. ./j
+mactools
+git pull

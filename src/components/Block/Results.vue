@@ -1,15 +1,15 @@
 <template>
-  <Block :title="ts >= payload.end ? 'Results' : 'Current results'">
+  <block :title="ts >= payload.end ? 'Results' : 'Current results'">
     <div v-for="(choice, i) in payload.choices" :key="i">
       <div class="text-white mb-1">
-        <span v-text="choice" class="mr-1" />
+        <span v-text="choice" class="mr-1"/>
         <span v-if="results.totalBalances[i]" class="mr-1">
           {{ _numeral(results.totalBalances[i]) }}
           {{ namespace.symbol || _shorten(namespace.token) }}
         </span>
         <span
-          class="float-right"
-          v-text="
+            class="float-right"
+            v-text="
             $n(
               !results.totalVotesBalances
                 ? 0
@@ -21,28 +21,57 @@
           "
         />
       </div>
-      <UiProgress
-        :value="[results.totalWalletBalances[i], results.totalBptBalances[i]]"
-        :max="results.totalVotesBalances"
-        class="mb-3"
+      <ui-progress
+          :value="[results.totalWalletBalances[i], results.totalBptBalances[i]]"
+          :max="results.totalVotesBalances"
+          class="mb-3"
       />
     </div>
-    <UiButton
-      @click="downloadReport"
-      v-if="ts >= payload.end"
-      class="width-full mt-2"
+    <ui-button
+        @click="downloadReport"
+        v-if="ts >= payload.end"
+        class="width-full mt-2"
     >
       Download report
-    </UiButton>
-  </Block>
+    </ui-button>
+  </block>
 </template>
 
 <script>
 import * as jsonexport from 'jsonexport/dist';
 import pkg from '@/../package.json';
+import Block from "../Block";
+import UiProgress from "../Ui/Progress";
+import UiButton from "../Ui/Button";
 
 export default {
-  props: ['namespace', 'payload', 'results', 'votes'],
+  name: "blockResult",
+  components: {UiButton, UiProgress, Block},
+  props: {
+    namespace: {
+      type: String,
+      required: true,
+      default: ""
+    },
+
+    payload: {
+      type: Object,
+      required: true,
+      default: ""
+    },
+
+    results: {
+      type: Object,
+      required: true,
+      default: ""
+    },
+
+    votes: {
+      type: Object,
+      required: true,
+      default: ""
+    }
+  },
   computed: {
     ts() {
       return (Date.now() / 1e3).toFixed();
@@ -51,20 +80,20 @@ export default {
   methods: {
     async downloadReport() {
       const obj = Object.entries(this.votes)
-        .map(vote => {
-          return {
-            address: vote[0],
-            choice: vote[1].msg.payload.choice,
-            balance: vote[1].balance,
-            timestamp: vote[1].msg.timestamp,
-            dateUtc: new Date(
-              parseInt(vote[1].msg.timestamp) * 1e3
-            ).toUTCString(),
-            authorIpfsHash: vote[1].authorIpfsHash,
-            relayerIpfsHash: vote[1].relayerIpfsHash
-          };
-        })
-        .sort((a, b) => a.timestamp - b.timestamp, 0);
+          .map(vote => {
+            return {
+              address: vote[0],
+              choice: vote[1].msg.payload.choice,
+              balance: vote[1].balance,
+              timestamp: vote[1].msg.timestamp,
+              dateUtc: new Date(
+                  parseInt(vote[1].msg.timestamp) * 1e3
+              ).toUTCString(),
+              authorIpfsHash: vote[1].authorIpfsHash,
+              relayerIpfsHash: vote[1].relayerIpfsHash
+            };
+          })
+          .sort((a, b) => a.timestamp - b.timestamp, 0);
       try {
         const csv = await jsonexport(obj);
         const link = document.createElement('a');

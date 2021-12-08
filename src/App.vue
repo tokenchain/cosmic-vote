@@ -1,18 +1,18 @@
 <template>
   <div id="app" class="overflow-hidden">
-    <UiLoading v-if="ui.loading || !ui.init" class="overlay big" />
+    <UiLoading v-if="ui.loading || !ui.init" class="overlay big"/>
     <div v-else>
-      <Topnav />
+      <Topnav/>
       <div class="pb-6 overflow-hidden">
-        <router-view :key="$route.path" class="flex-auto" />
+        <router-view :key="$route.path" class="flex-auto"/>
       </div>
     </div>
-    <Notifications />
+    <Notifications/>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import {mapActions} from 'vuex';
 
 export default {
   methods: {

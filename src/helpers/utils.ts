@@ -40,7 +40,6 @@ export function lsRemove(key: string) {
 
 export function formatProposal(proposal) {
   proposal.msg = jsonParse(proposal.msg, proposal.msg);
-
   // v0.1.0
   if (proposal.msg.version === '0.1.0') {
     proposal.msg.payload.start = 1595088000;

@@ -1,59 +1,64 @@
 <template>
-  <UiModal :open="open" v-if="open" @close="$emit('close')" class="d-flex">
+  <ui-modal :open="open" v-if="open" @close="$emit('close')" class="d-flex">
     <form @submit.prevent="handleSubmit" class="d-flex flex-column flex-auto">
       <h3 class="m-4 mb-0 text-center">Confirm vote</h3>
       <h4 class="m-4 mb-0 text-center">
         Are you sure you want to vote "{{
           proposal.msg.payload.choices[selectedChoice - 1]
-        }}"? <br />This action <b>cannot</b> be undone.
+        }}"? <br/>This action <b>cannot</b> be undone.
       </h4>
       <div class="m-4 p-4 border rounded-2 text-white">
         <div class="d-flex">
-          <span v-text="'Option'" class="flex-auto text-gray mr-1" />
+          <span v-text="'Option'" class="flex-auto text-gray mr-1"/>
           {{ proposal.msg.payload.choices[selectedChoice - 1] }}
         </div>
         <div class="d-flex">
-          <span v-text="'Snapshot'" class="flex-auto text-gray mr-1" />
-          <a
-            :href="_etherscanLink(proposal.msg.payload.snapshot, 'block')"
-            target="_blank"
-            class="float-right"
+          <span v-text="'Snapshot'" class="flex-auto text-gray mr-1"/>
+          <a :href="_etherscanLink(proposal.msg.payload.snapshot, 'block')"
+             target="_blank"
+             class="float-right"
           >
             {{ $n(proposal.msg.payload.snapshot) }}
-            <Icon name="external-link" class="ml-1" />
+            <icon name="external-link" class="ml-1"/>
           </a>
         </div>
         <div class="d-flex">
-          <span v-text="'Voting power'" class="flex-auto text-gray mr-1" />
-          <span v-text="`${_numeral(power.total)} ${namespace.symbol}`" />
+          <span v-text="'Voting power'" class="flex-auto text-gray mr-1"/>
+          <span v-text="`${_numeral(power.total)} ${namespace.symbol}`"/>
         </div>
       </div>
       <div class="p-4 overflow-hidden text-center border-top">
         <div class="col-6 float-left pr-2">
-          <UiButton @click="$emit('close')" type="button" class="width-full">
+          <ui-button @click="$emit('close')" type="button" class="width-full">
             Cancel
-          </UiButton>
+          </ui-button>
         </div>
         <div class="col-6 float-left pl-2">
-          <UiButton
-            :disabled="loading"
-            :loading="loading"
-            type="submit"
-            class="width-full button--submit"
-          >
+          <ui-button
+              :disabled="loading"
+              :loading="loading"
+              type="submit"
+              class="width-full button--submit">
             Vote
-          </UiButton>
+          </ui-button>
         </div>
       </div>
     </form>
-  </UiModal>
+  </ui-modal>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import {mapActions} from 'vuex';
 import namespaces from '@/namespaces.json';
+import UiModal from "../Ui/Modal";
+import Icon from "../Icon";
+import UiButton from "../Ui/Button";
+import string_tx from "../../api/mixins/string_tx";
 
 export default {
+  name: "confirm",
+  components: {UiButton, Icon, UiModal},
+  mixins: [string_tx],
   props: [
     'open',
     'namespace',

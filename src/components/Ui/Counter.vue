@@ -1,15 +1,19 @@
 <template>
-  <span v-if="counter > 0" v-text="counter" class="Counter" />
+  <span v-if="counter > 0" v-text="counter" class="Counter"/>
 </template>
-
 <script>
 export default {
+  name: "counter",
   props: {
-    counter: Number
+    counter: {
+      type: Number,
+      required: false,
+      // eslint-disable-next-line vue/require-valid-default-prop
+      default: []
+    },
   }
 };
 </script>
-
 <style scoped lang="scss">
 @import '../../vars';
 

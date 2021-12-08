@@ -1,17 +1,32 @@
 <template>
   <span class="Progress Progress--small overflow-hidden anim-scale-in">
     <span
-      v-for="(bar, i) in bars"
-      :key="i"
-      :style="`width: ${parseInt((100 / max) * bar)}%;`"
-      class="bg-blue"
+        v-for="(bar, i) in bars"
+        :key="i"
+        :style="`width: ${parseInt((100 / max) * bar)}%;`"
+        class="bg-blue"
     />
   </span>
 </template>
 
 <script>
 export default {
-  props: ['value', 'max'],
+  name: "uiProgress",
+  props: {
+
+    value: {
+      type: Number,
+      default: true,
+      required: false
+    },
+
+    max: {
+      type: Number,
+      default: true,
+      required: false
+    }
+
+  },
   computed: {
     bars() {
       return Array.isArray(this.value) ? this.value : [this.value];

@@ -1,9 +1,9 @@
 <template>
-  <div class="markdown-body break-word" v-html="markdown" />
+  <div class="markdown-body break-word" v-html="markdown"/>
 </template>
 <script>
-import { Remarkable } from 'remarkable';
-import { linkify } from 'remarkable/linkify';
+import {Remarkable} from 'remarkable';
+import {linkify} from 'remarkable/linkify';
 // import sanitizeHtml from 'sanitize-html';
 
 const remarkable = new Remarkable({
@@ -13,6 +13,7 @@ const remarkable = new Remarkable({
 }).use(linkify);
 
 export default {
+  name: "markdown",
   props: ['body'],
   computed: {
     markdown() {

@@ -1,19 +1,26 @@
 <template>
   <div>
-    <div v-if="isFixed" :style="`height: ${offsetHeight}px;`" />
+    <div v-if="isFixed" :style="`height: ${offsetHeight}px;`"/>
     <div
-      style="z-index: 20;"
-      id="sticky"
-      :class="{ 'position-fixed width-full top-0': isFixed }"
+        style="z-index: 20;"
+        id="sticky"
+        :class="{ 'position-fixed width-full top-0': isFixed }"
     >
-      <slot />
+      <slot/>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['isSticky'],
+  name:"sticky",
+  props: {
+    isSticky: {
+      type: Boolean,
+      default: true,
+      required: false
+    }
+  },
   data() {
     return {
       isFixed: false,

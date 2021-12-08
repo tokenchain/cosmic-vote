@@ -1,20 +1,32 @@
 <template>
   <button
-    :type="type || 'button'"
-    @click="$emit('click')"
-    class="button"
-    :disabled="loading"
+      :type="type || 'button'"
+      @click="$emit('click')"
+      class="button"
+      :disabled="loading"
   >
-    <UiLoading v-if="loading" />
-    <slot v-else />
+    <Loading v-if="loading"/>
+    <slot v-else/>
   </button>
 </template>
 
 <script>
+import Loading from "./Loading"
+
 export default {
+  name: "UiButton",
   props: {
-    loading: Boolean,
-    type: String
+    type: {
+      type: String,
+      required: true
+    },
+    loading: {
+      type: Boolean,
+      required: true
+    }
+  },
+  components: {
+    Loading
   }
 };
 </script>

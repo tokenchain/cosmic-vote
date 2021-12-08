@@ -1,19 +1,40 @@
 <template>
   <div
-    class="border-top border-bottom border-md rounded-0 rounded-md-2 mb-4 overflow-hidden"
+      class="border-top border-bottom border-md rounded-0 rounded-md-2 mb-4 overflow-hidden"
   >
     <h4 v-if="title" class="px-4 py-3 border-bottom d-block bg-gray-dark">
       {{ title }}
-      <UiCounter v-if="counter" :counter="counter" class="ml-1" />
+      <counter v-if="counter" :counter="counter" class="ml-1"/>
     </h4>
     <div :class="!slim && 'p-4'">
-      <slot />
+      <slot/>
     </div>
   </div>
 </template>
 
 <script>
+import Counter from "./Ui/Counter";
+
 export default {
-  props: ['title', 'counter', 'slim']
+  components: {Counter},
+  props: {
+    title: {
+      type: String,
+      default: "",
+      required: false
+    },
+    counter: {
+      type: Number,
+      default: 0,
+      required: false
+    },
+    slim: {
+      type: Boolean,
+      default: true,
+      required: false
+    }
+
+  },
+  name: "block"
 };
 </script>

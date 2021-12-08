@@ -1,14 +1,27 @@
 <template>
   <i
-    class="iconfont"
-    :class="`icon${name}`"
-    :style="size ? `font-size: ${size}px; line-height: ${size}px;` : ''"
+      class="iconfont"
+      :class="`icon${name}`"
+      :style="size ? `font-size: ${size}px; line-height: ${size}px;` : ''"
   />
 </template>
 
 <script>
 export default {
-  props: ['name', 'size']
+  name: "icon",
+  props: {
+    name: {
+      type: String,
+      default: "",
+      required: false
+    },
+    size: {
+      type: Number | String,
+      default: 0,
+      required: false
+    }
+
+  }
 };
 </script>
 

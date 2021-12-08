@@ -1,41 +1,40 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "strict": true,
-    "jsx": "preserve",
-    "importHelpers": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-    "types": [
-      "webpack-env"
+    "target": "ES2020",
+    // These settings are required for TypeScript project references
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false,
+    "lib": [
+      "DOM.Iterable",
+      "DOM",
+      "ES2020",
+      "dom",
+      "esnext.asynciterable"
     ],
+    "module": "es2015",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "strictNullChecks": true,
+    "removeComments": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
+      "*": [
+        "./src/api/*"
       ]
     },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ],
-    "noImplicitAny": false,
-    "resolveJsonModule": true,
-    "skipLibCheck": true
+    "noUnusedLocals": false
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
-  ],
   "exclude": [
-    "node_modules"
+    "nuxt.config.js",
+    "postcss.config.js",
+    "src/**/*.js",
+    "src/**/*.d.ts",
+    "src/**/*.vue"
   ]
 }
