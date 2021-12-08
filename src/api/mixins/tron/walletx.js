@@ -3,7 +3,6 @@ import {
     ImTokenComponent,
     EthereumWeb3Component
 } from "vue-blocklink"
-
 import {sleep} from "@/plugins/network"
 import {EventBus} from "vue-backgrounds"
 import lo_wall from "@/api/mixins/balincer/lo_wallet"

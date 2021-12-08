@@ -61,7 +61,7 @@ dev(){
   cnpm run dev
 }
 
-deploy_balincer(){
+deploy_dao_maker(){
   rm -rf dist
   rm -rf $DIST_DIR
   if [[ ! -f dist ]]; then

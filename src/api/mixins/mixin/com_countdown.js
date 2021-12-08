@@ -1,9 +1,9 @@
-import txt from "@/api/mixins/string_tx"
-import { EventBus } from "vue-backgrounds"
-import { CountDown } from "vue-blocklink"
+import {EventBus} from "vue-backgrounds"
+import {CountDown} from "vue-blocklink"
+import string_tx from "../string_tx";
 
 export default {
-    mixins: [txt],
+    mixins: [string_tx],
     data() {
         return {
             countdown_h: -1,
@@ -26,7 +26,7 @@ export default {
         //EventBus.$on("dataUpdate", this.nowInstall)
     },
     beforeDestroy() {
-       // EventBus.$off("dataUpdate", this.nowInstall)
+        // EventBus.$off("dataUpdate", this.nowInstall)
     },
     methods: {
         nowInstall() {
